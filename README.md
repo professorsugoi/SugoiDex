@@ -6,6 +6,8 @@
 
 For a mostly static site configured as output: hybrid, add `export const prerender = false` to any files that should be server-rendered on demand
 
+---
+
 - [x] api working yipee / basic setup
 - [x] pagination
 - [ ] filters
