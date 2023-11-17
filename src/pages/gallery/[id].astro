@@ -8,13 +8,22 @@ import { getAllGalleryItems } from '../../utils/fetchData';
 
 export async function getStaticPaths() {
 	const items = await getAllGalleryItems();
-	return items.map((item) => ({
-		params: { id: item.ID },
-		props: item,
-	}));
-}
+	const paths = items.map((item, index) => {
+		const nextIndex = index + 1 < items.length ? index + 1 : 0;
+		const prevIndex = index - 1 >= 0 ? index - 1 : items.length - 1;
 
-const item = Astro.props;
+		return {
+			params: { id: item.ID },
+			props: {
+				item,
+				nextId: items[nextIndex].ID,
+				prevId: items[prevIndex].ID,
+			},
+		};
+	});
+	return paths;
+}
+const { item, nextId, prevId } = Astro.props;
 ---
 
 <!doctype html>
@@ -33,7 +42,6 @@ const item = Astro.props;
 				box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 				text-align: center;
 			}
-
 			.gallery-item img {
 				display: inline-block;
 				vertical-align: top;
@@ -45,6 +53,14 @@ const item = Astro.props;
 	<body>
 		<Header title={SITE_TITLE} />
 		<main>
+			<!-- PREV / NEXT buttons -->
+			<nav class='gallery-navigation'>
+				<a href={`/gallery/${prevId}`} class='prev'>Previous</a>
+				<a href={`/gallery/${nextId}`} class='next'>Next</a>
+			</nav>
+			<!-- ---------------- -->
+
+			<!-- full gallery entry -->
 			<section class='gallery-detail'>
 				<div class='gallery-item'>
 					<img src={item.Image} alt={item.Species} />
@@ -61,6 +77,7 @@ const item = Astro.props;
 					</span>
 				</div>
 			</section>
+			<!-- ---------------- -->
 		</main>
 		<Footer />
 	</body>
