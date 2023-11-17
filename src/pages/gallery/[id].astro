@@ -1,0 +1,67 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
+
+import { getAllGalleryItems } from '../../utils/fetchData';
+
+export async function getStaticPaths() {
+	const items = await getAllGalleryItems();
+	return items.map((item) => ({
+		params: { id: item.ID },
+		props: item,
+	}));
+}
+
+const item = Astro.props;
+---
+
+<!doctype html>
+<html lang='en'>
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header title={SITE_TITLE} />
+		<main>
+			<section class='gallery-detail'>
+				<div class='gallery-item'>
+					<img src={item.Image} alt={item.Species} />
+					<h3>{item.Species}</h3>
+					<span>
+						<p>{item.DesignType}</p>
+						<p>Owner: {item.Owner}</p>
+						<p>Artist: {item.Artist}</p>
+						<p>Designer: {item.Designer}</p>
+						<p>Worth: {item.Worth}</p>
+						<p>Status: {item.Status}</p>
+						<p>Transaction Type: {item.TransactionType}</p>
+						<p>Notes: {item.Notes}</p>
+					</span>
+				</div>
+			</section>
+		</main>
+		<Footer />
+		<style>
+			span {
+				display: inline-block;
+				width: 46%;
+				@media (max-width: 620px) width: 100%;
+			}
+			.gallery-item {
+				border: 1px solid #eee;
+				padding: 10px;
+				box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+				text-align: center;
+			}
+
+			.gallery-item img {
+				display: inline-block;
+				vertical-align: top;
+				width: 46%;
+				margin: 20px 30px 0 0;
+			}
+		</style>
+	</body>
+</html>

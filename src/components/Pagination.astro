@@ -1,0 +1,22 @@
+---
+export async function getStaticPaths({ paginate }) {
+	const galleryItems = await fetchGalleryData();
+	return paginate(galleryItems, { pageSize: 10 });
+}
+
+const { page } = Astro.props;
+---
+
+<template>
+	<div>
+		{props.currentPage > 1 && <a href={`?page=${props.currentPage - 1}`}>Previous</a>}
+		{
+			Array.from({ length: props.totalPages }).map((_, index) => (
+				<a href={`?page=${index + 1}`} key={index} class={props.currentPage === index + 1 ? 'active' : ''}>
+					{index + 1}
+				</a>
+			))
+		}
+		{props.currentPage < props.totalPages && <a href={`?page=${props.currentPage + 1}`}>Next</a>}
+	</div>
+</template>
