@@ -14,7 +14,7 @@ For a mostly static site configured as output: hybrid, add `export const prerend
 - [ ] basic styling
 - [ ] webhook to trigger build on sheet edit
 - [ ] host this bad boye
-- [ ] look into https://humaan.com/modaal/
+- [ ] look into https://github.com/topics/modal-plugin | https://github.com/rebelchris/astro-modal
 
 ## Resources
 
