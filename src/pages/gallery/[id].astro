@@ -21,6 +21,26 @@ const item = Astro.props;
 <html lang='en'>
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<style>
+			span {
+				display: inline-block;
+				width: 46%;
+				@media (max-width: 620px) width: 100%;
+			}
+			.gallery-item {
+				border: 1px solid #eee;
+				padding: 10px;
+				box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+				text-align: center;
+			}
+
+			.gallery-item img {
+				display: inline-block;
+				vertical-align: top;
+				width: 46%;
+				margin: 20px 30px 0 0;
+			}
+		</style>
 	</head>
 	<body>
 		<Header title={SITE_TITLE} />
@@ -43,25 +63,5 @@ const item = Astro.props;
 			</section>
 		</main>
 		<Footer />
-		<style>
-			span {
-				display: inline-block;
-				width: 46%;
-				@media (max-width: 620px) width: 100%;
-			}
-			.gallery-item {
-				border: 1px solid #eee;
-				padding: 10px;
-				box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-				text-align: center;
-			}
-
-			.gallery-item img {
-				display: inline-block;
-				vertical-align: top;
-				width: 46%;
-				margin: 20px 30px 0 0;
-			}
-		</style>
 	</body>
 </html>

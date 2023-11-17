@@ -1,0 +1,29 @@
+/* styling for @astro-headless-ui components must be imported */
+/* will NOT render in-line */
+
+.pagination {
+	grid-column: 1 / -1;
+	justify-self: center;
+	margin-top: 20px;
+}
+
+.pagination a[aria-current],
+.pagination .active {
+	display: inline-block;
+	margin: 0 5px;
+	padding: 8px 12px;
+	background-color: #f4f4f4;
+	color: #333;
+	text-decoration: none;
+	border-radius: 4px;
+	transition: background-color 0.2s;
+}
+
+.pagination a:hover {
+	background-color: #e4e4e4;
+}
+
+.pagination .active {
+	background-color: #0078d4;
+	color: white;
+}
